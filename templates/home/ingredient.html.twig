@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de {{ ingredient.name }}{% endblock %}
+
+{% block body %}
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ ingredient.name }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <b>type</b>
+            </div>
+            <div class="col-6">
+                {% if ingredient.type %}
+                    {{ ingredient.type }}
+                {% else %}
+                    undefined
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>cocktails</h2>
+            </div>
+        </div>
+        {% for cocktailIngredient in ingredient.cocktailIngredients %}
+            <div class="row">
+                <div class="col-6">
+                    <b>name</b>
+                </div>
+                <div class="col-6">
+                    {{ cocktailIngredient.cocktail.name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <b>quantity</b>
+                </div>
+                <div class="col-6">
+                    {{ cocktailIngredient.quantity }}&nbsp;{{ cocktailIngredient.quantityType }}
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-12">
+                    ingredients.no
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}

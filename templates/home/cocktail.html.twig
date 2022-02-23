@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de {{ cocktail.name }}{% endblock %}
+
+{% block body %}
+        {% if cocktail.coverFilename %}
+        <div class="row">
+            <div class="col-12">
+                <img src="{{ asset(cocktail.coverFilename) }}" class="img-thumbnail" alt="Responsive image" width="200px">
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ cocktail.name }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <b>price</b>
+            </div>
+            <div class="col-6">
+                {{ cocktail.price }}
+            </div>
+            <div class="col-6">
+                <b>hasAlcohol</b>
+            </div>
+            <div class="col-6">
+                {% if cocktail.hasAlcohol %}
+                    yes
+                {% else %}
+                    no
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <b>origin</b>
+            </div>
+            <div class="col-6">
+                {% if cocktail.origin %}
+                    {{ cocktail.origin }}
+                {% else %}
+                    unknown
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>ingredients</h2>
+            </div>
+        </div>
+        {% for cocktailIngredient in cocktail.cocktailIngredients %}
+            <div class="row">
+                <div class="col-6">
+                    <b>name</b>
+                </div>
+                <div class="col-6">
+                    {{ cocktailIngredient.ingredient.name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <b>quantity</b>
+                </div>
+                <div class="col-6">
+                    {{ cocktailIngredient.quantity }}&nbsp;{{ cocktailIngredient.quantityType }}
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-12">
+                    ingredients.no
+                </div>
+            </div>
+        {% endfor %}
+    <a href="{{ path('cocktail', {'id': cocktail.id, 'action': 'edit'}) }}" class="btn btn-secondary mt-5">Modifier</a>
+{% endblock %}

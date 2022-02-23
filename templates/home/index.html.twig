@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello de Fizz up!{% endblock %}
+
+{% block body %}
+        <div class="row">
+            <div class="col-6">
+                <h2>Cocktails</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">name</th>
+                        <th scope="col">hasAlcohol</th>
+                        <th scope="col">origin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# Boucler sur les cocktails #}
+                    {% for cocktail in cocktails %}
+                        <tr>
+                            <th scope="row">
+                                {{ cocktail.id }}
+                            </th>
+                            <td>{{ cocktail.name }}</td>
+                            <td>{% if cocktail.hasAlcohol %}yes{% else %}no{% endif %}</td>
+                            <td>
+                                {% if cocktail.origin %}
+                                    {{ cocktail.origin }}
+                                {% else %}
+                                    unknown
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('cocktail', {'id': cocktail.id}) }}" class="btn btn-primary">voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6">
+                <h2>Ingrédients</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">name</th>
+                        <th scope="col">type</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# Boucler sur les cocktails #}
+                    {% for ingredient in ingredients %}
+                        <tr>
+                            <th scope="row">{{ ingredient.id }}</th>
+                            <td>{{ ingredient.name }}</td>
+                            <td>
+                                {% if ingredient.type %}
+                                    {{ ingredient.type }}
+                                {% else %}
+                                    undefined
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('ingredient', {'id': ingredient.id}) }}" class="btn btn-primary">voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock %}
+
+
+
+

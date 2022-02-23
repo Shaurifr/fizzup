@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un cocktail{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('home_cocktailAdd') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('home_cocktailAdd') }}
+{% endblock %}
+
+{% block body %}
+    {#
+    {{ form(cocktailForm) }}
+    #}
+    {#
+    {{ form_start(cocktailForm) }}
+
+    {{ form_row(cocktailForm.name) }}
+    {{ form_row(cocktailForm.origin) }}
+    {{ form_row(cocktailForm.hasAlcohol) }}
+    <hr>
+    {{ form_row(cocktailForm.price) }}
+    <hr>
+    {{ form_row(cocktailForm.Ajouter) }}
+
+    {{ form_end(cocktailForm) }}
+    #}
+    {{ form_start(cocktailForm) }}
+
+    {{ form_label(cocktailForm.cover) }}
+    {{ form_widget(cocktailForm.cover) }}
+    {{ form_errors(cocktailForm.cover) }}
+    {{ form_help(cocktailForm.cover) }}
+
+    {{ form_label(cocktailForm.name) }}
+    {{ form_widget(cocktailForm.name) }}
+    {{ form_errors(cocktailForm.name) }}
+    {{ form_help(cocktailForm.name) }}
+
+    {{ form_label(cocktailForm.price) }}
+    {{ form_widget(cocktailForm.price) }}
+    {{ form_errors(cocktailForm.price) }}
+    {{ form_help(cocktailForm.price) }}
+
+    {{ form_label(cocktailForm.origin) }}
+    {{ form_widget(cocktailForm.origin) }}
+    {{ form_errors(cocktailForm.origin) }}
+    {{ form_help(cocktailForm.origin) }}
+
+    {{ form_label(cocktailForm.hasAlcohol) }}
+    {{ form_widget(cocktailForm.hasAlcohol) }}
+    {{ form_errors(cocktailForm.hasAlcohol) }}
+    {{ form_help(cocktailForm.hasAlcohol) }}
+
+
+
+
+    <h3>{{ form_label(cocktailForm.cocktailIngredients) }}</h3>
+    <div class="cocktailIngredients"
+         data-index="{{ cocktailForm.cocktailIngredients|length > 0 ? cocktailForm.cocktailIngredients|last.vars.name + 1 : 0 }}"
+         data-prototype="{{ form_row(cocktailForm.cocktailIngredients.vars.prototype)|e('html_attr') }}">
+        {% for cocktailIngredient in cocktailForm.cocktailIngredients %}
+            <div class="cocktailIngredient">
+                {{ form_row(cocktailIngredient.quantity) }}
+                {{ form_row(cocktailIngredient.quantityType) }}
+                {{ form_row(cocktailIngredient.ingredient) }}
+            </div>
+        {% endfor %}
+        <button type="button" class="add_item_link" data-collection-holder-class="cocktailIngredients">Ajouter un ingrédient</button>
+    </div>
+
+
+    {{ form_rest(cocktailForm) }}
+    {{ form_end(cocktailForm) }}
+{% endblock %}
+
+
